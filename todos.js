@@ -35,7 +35,7 @@ $(function(){
     model: Scene,
 
     // Save all of the todo items under the `"todos-backbone"` namespace.
-    localStorage: new Backbone.LocalStorage("xxx-backbone"),
+    localStorage: new Backbone.LocalStorage("xxxyz-backbone"),
 
     // We keep the Todos in sequential order, despite being saved by unordered
     // GUID in the database. This generates the next order number for new items.
@@ -158,5 +158,6 @@ $(function(){
 
   // Finally, we kick things off by creating the **App**.
   var App = new AppView;
+  _.invoke(Scenes, 'destroy');
   Scenes.create({instructions: "Welcome to Git Neat!"});
 });
