@@ -18,10 +18,6 @@ $(function(){
         scene_number: 0,
         order: Scenes.nextOrder()
       };
-    },
-
-    initial_to_result: function() {
-      alert('clicked!');
     }
 
   });
