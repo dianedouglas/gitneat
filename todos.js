@@ -15,6 +15,7 @@ $(function(){
     defaults: function() {
       return {
         instructions: "Here is some default text.",
+        scene_number: 0,
         order: Scenes.nextOrder()
       };
     },
@@ -86,7 +87,10 @@ $(function(){
     // Toggle the `"done"` state of the model.
     clickedInstructions: function() {
       this.clear();
-      // this.model.initial_to_result();
+      Scenes.create({
+        instructions: script[this.model.get('scene_number') + 1],
+        scene_number: this.model.get('scene_number') + 1
+      });
     },
 
     // Remove the item, destroy the model.
@@ -155,12 +159,14 @@ $(function(){
     }
   });
 
-  // Finally, we kick things off by creating the **App**.
+  var script = ["Welcome to Git Neat!", "How are you?", "I am fine."];
   var views = [];
   var App = new AppView;
   views.forEach(function(view){
     view.clear();
   })
-  // _.invoke(Scenes, 'clear');
-  Scenes.create({instructions: "Welcome to Git Neat!"});
+  Scenes.create({
+    instructions: script[0],
+    scene_number: 0
+  });
 });
