@@ -35,7 +35,7 @@ $(function(){
     model: Scene,
 
     // Save all of the todo items under the `"todos-backbone"` namespace.
-    localStorage: new Backbone.LocalStorage("xxxyz-backbone"),
+    localStorage: new Backbone.LocalStorage("xy-backbone"),
 
     // We keep the Todos in sequential order, despite being saved by unordered
     // GUID in the database. This generates the next order number for new items.
@@ -64,6 +64,7 @@ $(function(){
     template: _.template($('#item-template').html()),
 
     // The DOM events specific to an item.
+    // here we would specify the click area to show the next scene.
     events: {
       "click .view"   : "clickedInstructions"
     },
@@ -79,13 +80,13 @@ $(function(){
     // Re-render the titles of the todo item.
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
-      console.log(this.template(this.model.toJSON()));
       return this;
     },
 
     // Toggle the `"done"` state of the model.
     clickedInstructions: function() {
-      this.model.initial_to_result();
+      this.clear();
+      // this.model.initial_to_result();
     },
 
     // Remove the item, destroy the model.
@@ -134,10 +135,8 @@ $(function(){
     // Add a single todo item to the list by creating a view for it, and
     // appending its element to the `<ul>`.
     addOne: function(scene) {
-      var view = new SceneView({model: scene});
-      debugger;
-      this.$("#todo-list").append(view.render().el);
-      console.log(view.render().el);
+      views.push(new SceneView({model: scene}));
+      this.$("#todo-list").append(views[views.length - 1].render().el);
     },
 
     // Add all items in the **Todos** collection at once.
@@ -157,7 +156,11 @@ $(function(){
   });
 
   // Finally, we kick things off by creating the **App**.
+  var views = [];
   var App = new AppView;
-  _.invoke(Scenes, 'destroy');
+  views.forEach(function(view){
+    view.clear();
+  })
+  // _.invoke(Scenes, 'clear');
   Scenes.create({instructions: "Welcome to Git Neat!"});
 });
