@@ -90,6 +90,28 @@ body {
 	background: url(img/destroy.png) no-repeat;
 }
 
+#todo-list .img0 {
+	position: absolute;
+	right: 5px;
+	top: 20px;
+	cursor: pointer;
+	width: 500px;
+	height: 500px;
+	display: block;
+	background: url(img/immortal.jpg) no-repeat;
+}
+
+#todo-list .img1 {
+	position: absolute;
+	right: 5px;
+	top: 20px;
+	cursor: pointer;
+	width: 500px;
+	height: 500px;
+	display: block;
+	background: url(img/corgi.jpg) no-repeat;
+}
+
 #todo-list li:hover .destroy {
   	display: block;
 }

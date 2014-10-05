@@ -15,6 +15,7 @@ $(function(){
     defaults: function() {
       return {
         instructions: "Here is some default text.",
+        img_class: "img",
         scene_number: 0,
         order: Scenes.nextOrder()
       };
@@ -82,9 +83,11 @@ $(function(){
 
     // Toggle the `"done"` state of the model.
     clickedInstructions: function() {
+      var image_id = String(this.model.get('scene_number') + 1);
       this.clear();
       Scenes.create({
         instructions: script[this.model.get('scene_number') + 1],
+        img_class: "img" + image_id,
         scene_number: this.model.get('scene_number') + 1
       });
     },
@@ -137,6 +140,7 @@ $(function(){
     addOne: function(scene) {
       views.push(new SceneView({model: scene}));
       this.$("#todo-list").append(views[views.length - 1].render().el);
+      console.log(views[views.length - 1].render().el);
     },
 
     // Add all items in the **Todos** collection at once.
@@ -146,13 +150,13 @@ $(function(){
 
     // If you hit return in the main input field, create new **Todo** model,
     // persisting it to *localStorage*.
-    createOnEnter: function(e) {
-      if (e.keyCode != 13) return;
-      if (!this.input.val()) return;
+    // createOnEnter: function(e) {
+    //   if (e.keyCode != 13) return;
+    //   if (!this.input.val()) return;
 
-      Scenes.create({instructions: this.input.val()});
-      this.input.val('');
-    }
+    //   Scenes.create({instructions: this.input.val()});
+    //   this.input.val('');
+    // }
   });
 
   var script = ["Welcome to Git Neat!", "How are you?", "I am fine."];
@@ -163,6 +167,7 @@ $(function(){
   })
   Scenes.create({
     instructions: script[0],
+    img_class: "img0",
     scene_number: 0
   });
 });
